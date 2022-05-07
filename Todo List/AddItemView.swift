@@ -6,20 +6,20 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AddItemView: View {
-    static let addNewItem = Notification.Name("addNewItem")
-    
+    @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.dismiss) private var dismiss
-    @State private var item = Item(startDate: Date(), title: "")
+    @State var item:Item
     
     var body: some View {
         VStack {
             Text("Add New Item")
                 .font(.title2)
             
-            TextField("What to do?", text: $item.title, prompt: Text("Go shopping."))
-            DatePicker("When?", selection: $item.startDate)
+            TextField("What to do?", text: Binding($item.title) ?? .constant(""), prompt: Text("Go shopping."))
+            DatePicker("When?", selection: Binding($item.startDate) ?? .constant(Date()))
             
             HStack {
                 Button {
@@ -27,7 +27,6 @@ struct AddItemView: View {
                 } label: {
                     Text("Save")
                 }
-                .disabled(item.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
                 Spacer()
                 
@@ -42,17 +41,34 @@ struct AddItemView: View {
     }
     
     private func save() {
-        NotificationCenter.default.post(name: AddItemView.addNewItem, object: nil, userInfo: ["new item" : item])
+        if var title = item.title {
+            title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !title.isEmpty else {
+                let alert = NSAlert()
+                alert.messageText = NSLocalizedString("Title is empty!", comment: "")
+                alert.alertStyle = .warning
+                alert.addButton(withTitle: NSLocalizedString("OK", comment: ""))
+                NSSound.beep()
+                alert.runModal()
+                
+                return
+            }
+            
+            do {
+                item.title = title
+                try managedObjectContext.save()
+            } catch {
+                let alert = NSAlert(error: error)
+                NSSound.beep()
+                alert.runModal()
+            }
+        }
+        
         dismiss()
     }
     
     private func cancel() {
+        managedObjectContext.rollback()
         dismiss()
-    }
-}
-
-struct AddItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddItemView()
     }
 }

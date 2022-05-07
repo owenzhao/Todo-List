@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var items = [Item]()
-    @State private var addNewItem = false
-    
-    let addNewItemPublisher = NotificationCenter.default.publisher(for: AddItemView.addNewItem)
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate, order: .forward)]) var items:FetchedResults<Item>
+    @State private var item:Item?
     
     var body: some View {
         VStack {
@@ -19,19 +18,13 @@ struct ContentView: View {
                 if items.isEmpty {
                     Text("No Data")
                 } else {
-                    List($items) { item in
+                    List(items) { item in
                         HStack {
-                            Text(DateFormatter.localizedString(from: item.startDate.wrappedValue, dateStyle: .none, timeStyle: .short))
-                            Text(item.title.wrappedValue)
+                            Text(DateFormatter.localizedString(from: item.startDate!, dateStyle: .none, timeStyle: .short))
+                            Text(item.title!)
                         }
                     }
                     .frame(minWidth: 580, minHeight: 400, idealHeight: 600)
-                }
-            }
-            .onReceive(addNewItemPublisher) { notification in
-                if let userInfo = notification.userInfo as? [String:Item], let item = userInfo["new item"] {
-                    items.append(item)
-                    print(items)
                 }
             }
             
@@ -40,17 +33,19 @@ struct ContentView: View {
             } label: {
                 Text("Add")
             }
-            .sheet(isPresented: $addNewItem) {
-                AddItemView()
+            .sheet(item: $item) { item in
+                AddItemView(item: item)
             }
         }
         .padding()
-        .frame(width: 600, height: 600, alignment: .center)
-        
+        .frame(width: 600, height: 600, alignment: .center) 
     }
     
     private func add() {
-        addNewItem = true
+        let item = Item(context: managedObjectContext)
+        item.id = UUID()
+        item.startDate = Date()
+        self.item = item
     }
 }
 

@@ -11,8 +11,9 @@
 		DC470A542825C82500C65934 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC470A532825C82500C65934 /* ContentView.swift */; };
 		DC470A562825C82600C65934 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC470A552825C82600C65934 /* Assets.xcassets */; };
 		DC470A592825C82600C65934 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC470A582825C82600C65934 /* Preview Assets.xcassets */; };
-		DC470A612825C84700C65934 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC470A602825C84700C65934 /* Model.swift */; };
 		DC470A632825C9BD00C65934 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC470A622825C9BD00C65934 /* AddItemView.swift */; };
+		DC470A662825DA3500C65934 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC470A642825DA3500C65934 /* Model.xcdatamodeld */; };
+		DC470A6A2825E84F00C65934 /* ItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC470A692825E84F00C65934 /* ItemProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,8 +23,9 @@
 		DC470A552825C82600C65934 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC470A582825C82600C65934 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DC470A5A2825C82600C65934 /* Todo_List.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Todo_List.entitlements; sourceTree = "<group>"; };
-		DC470A602825C84700C65934 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		DC470A622825C9BD00C65934 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		DC470A652825DA3500C65934 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		DC470A692825E84F00C65934 /* ItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +61,8 @@
 				DC470A512825C82500C65934 /* Todo_ListApp.swift */,
 				DC470A532825C82500C65934 /* ContentView.swift */,
 				DC470A622825C9BD00C65934 /* AddItemView.swift */,
-				DC470A602825C84700C65934 /* Model.swift */,
+				DC470A692825E84F00C65934 /* ItemProvider.swift */,
+				DC470A642825DA3500C65934 /* Model.xcdatamodeld */,
 				DC470A552825C82600C65934 /* Assets.xcassets */,
 				DC470A5A2825C82600C65934 /* Todo_List.entitlements */,
 				DC470A572825C82600C65934 /* Preview Content */,
@@ -145,8 +148,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC470A612825C84700C65934 /* Model.swift in Sources */,
 				DC470A542825C82500C65934 /* ContentView.swift in Sources */,
+				DC470A6A2825E84F00C65934 /* ItemProvider.swift in Sources */,
+				DC470A662825DA3500C65934 /* Model.xcdatamodeld in Sources */,
 				DC470A522825C82500C65934 /* Todo_ListApp.swift in Sources */,
 				DC470A632825C9BD00C65934 /* AddItemView.swift in Sources */,
 			);
@@ -344,6 +348,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DC470A642825DA3500C65934 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DC470A652825DA3500C65934 /* Model.xcdatamodel */,
+			);
+			currentVersion = DC470A652825DA3500C65934 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DC470A462825C82500C65934 /* Project object */;
 }
